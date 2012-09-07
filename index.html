@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>POMMG - THE VIDEO GAME</title>
+    
+    <!-- Global Util Scripts -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        window.requestAnimFrame = (function(){
+                return window.requestAnimationFrame    ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame    ||
+                    window.oRequestAnimationFrame      ||
+                    window.msRequestAnimationFrame     ||
+                function (callback) {
+                    window.setTimeout(callback, 1000 / 60);
+                };
+        })();
+    </script>
+    
+    <!-- Include Scripts -->
+    <script type="text/javascript" src="js/components.js"></script>
+    <script type="text/javascript" src="js/entities.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="js/renderers.js"></script>
+    <script type="text/javascript" src="js/util.js"></script>
+    <script type="text/javascript" src="js/world.js"></script>
+
+    <!-- Initialization -->
+    <!-- FIXME: ensure this runs AFTER the canvas object is loaded -->
+    <script type="text/javascript" src="js/init.js"></script> 
+</head>
+<body>
+    <canvas id="main-canvas"></canvas>
+</body>
+</html>

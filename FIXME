@@ -1,0 +1,5 @@
+#Things to be Fixed (in no particular order):
+
+Stray, lone classes in files, should be consolidated with other files.
+Lack of a data-driven loading setup.
+Uncertainty on where to place event handlers.
