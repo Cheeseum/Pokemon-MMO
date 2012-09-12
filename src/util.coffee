@@ -19,3 +19,26 @@ class @GraphicsContext
         @context.setTransform(1, 0, 0, 1, 0, 0)
         @context.clearRect(0, 0, @canvas.width, @canvas.height)
         @context.restore()
+
+class @InputManager
+    # focus: a DOM object to pull input from
+    constructor: (@focus) ->
+        @keyStates = {}
+
+        $(@focus).keyup(@onKeyUp)
+        $(@focus).keydown(@onKeyDown)
+
+    onKeyUp: (event) =>
+        @keyStates[event.which] = true
+        #TODO: propagate event here
+
+    onKeyDown: (event) =>
+        @keyStates[event.which] = false
+        #TODO: propagate event here
+
+    isKeyUp: (keyCode) =>
+        # check key against false so undef doesn't throw false positives
+        return (@keyStates[keyCode] == false) or false
+
+    isKeyDown: (keyCode) =>
+        return @keyStates[keyCode] or false
