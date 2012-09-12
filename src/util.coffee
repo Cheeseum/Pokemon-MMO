@@ -2,8 +2,8 @@ class @EventManager
     constructor: () ->
         @listeners = {}
 
-     addHandler: (event, callback) =>
-        @listeners[event] = [] if ! @listeners[event]
+    addHandler: (event, callback) =>
+        @listeners[event] or= []
         @listeners[event].push(callback)
 
     dispatchEvent: (event, data...) =>

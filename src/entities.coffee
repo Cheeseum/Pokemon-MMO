@@ -6,8 +6,7 @@ class @Entity
         @y = 0
 
     addComponent: (type, component) =>
-        if not @components[type]
-            @components[type] = []
+        @components[type] or= []
 
         component.object = this
         @components[type].push(component)
