@@ -42,3 +42,10 @@ class @InputManager
 
     isKeyDown: (keyCode) =>
         return @keyStates[keyCode] or false
+
+class @Vector
+    constructor: (@x = 0, @y = 0) ->
+
+    zero: () =>
+        @x = 0
+        @y = 0
