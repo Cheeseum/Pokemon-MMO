@@ -2,8 +2,7 @@ class @Entity
     constructor: () ->
         @components = {}
 
-        @x = 0
-        @y = 0
+        @pos = new Vector()
 
     addComponent: (type, component) =>
         @components[type] or= []

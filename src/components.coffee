@@ -18,21 +18,39 @@ class @TilePhysicsComponent extends @Component
     constructor: () ->
         @moving = false
 
-        @realpos = new Vector()
+        # The position of the object in grid coordinates (whole integer)
+        # Always updated BEFORE the real position
+        @gridpos = new Vector()
+
+        # A normalized (equal to +/-1) velocity vector in x and y
         @velocity = new Vector()
 
     update: (t, dt) =>
-        #TODO; tile smoothing
+        @object.pos = @object.pos.add(@velocity.multiply(dt))
+
+        # Moving left,right,up,down and overshot the grid square
+        if (@velocity.x < 0 and @object.pos.x <= @gridpos.x) or
+           (@velocity.x > 0 and @object.pos.x >= @gridpos.x) or
+           (@velocity.y > 0 and @object.pos.y >= @gridpos.y) or
+           (@velocity.y < 0 and @object.pos.y <= @gridpos.y)
+
+            @moving = false
+            @velocity.zero()
+            @object.pos = @gridpos
 
     move: (direction) =>
-        
+        return if @moving
+
+        @moving = true
         @velocity.zero()
 
         switch(direction)
-            when @DIR.UP    then @velocity.y = 1
-            when @DIR.DOWN  then @velocity.y = -1
-            when @DIR.RIGHT then @velocity.x = 1
-            when @DIR.LEFT  then @velocity.x = -1
+            when DIR.UP    then @velocity.y = -1
+            when DIR.DOWN  then @velocity.y = 1
+            when DIR.RIGHT then @velocity.x = 1
+            when DIR.LEFT  then @velocity.x = -1
+
+        @gridpos = @gridpos.add(@velocity)
 
 class @InputComponent extends @Component
      constructor: (@input) ->
@@ -43,16 +61,14 @@ class @PlayerInputComponent extends @InputComponent
         dir = 0
 
         # FIXME: this is stupid
-        # FIXME: also it doesn't work since `this` for some reason
-        # since ends up pointing to `PlayerInputComponent`
-        if @input.isKeyDown(@KEY.UP)
-            dir = @DIR.UP
-        else if @input.isKeyDown(@KEY.DOWN)
-            dir = @DIR.DOWN
-        else if @input.isKeyDown(@KEY.LEFT)
-            dir = @DIR.LEFT
-        else if @input.isKeyDown(@KEY.RIGHT)
-            dir = @DIR.RIGHT
+        if @input.isKeyDown(KEY.UP)
+            dir = DIR.UP
+        else if @input.isKeyDown(KEY.DOWN)
+            dir = DIR.DOWN
+        else if @input.isKeyDown(KEY.LEFT)
+            dir = DIR.LEFT
+        else if @input.isKeyDown(KEY.RIGHT)
+            dir = DIR.RIGHT
 
         if (dir)
             physics.move(dir) for physics in @object.getComponents("physics")
