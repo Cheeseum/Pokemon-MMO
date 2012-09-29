@@ -5,6 +5,7 @@ class @Game
 
         # FIXME: decouple this canvas object dependency
         @graphics = new GraphicsContext($("#main-canvas").get(0))
+        @input = new InputManager(window)
 
         @old_time = @new_time = 0
         @t = @accumulator = 0.0
@@ -12,9 +13,13 @@ class @Game
 
     run: () =>
         # usage example
-        #e = new Entity()
-        #e.addComponent("renderer", new RenderComponent(@context))
-        #@world.addEntity(e)
+        e = new Entity()
+        for c of OBJECTS["player"]
+            e.addComponent(c, new window.OBJECTS["player"][c])
+
+        i.input = @input for i in e.getComponents("input")
+
+        @world.addEntity(e)
 
         @update()
         @draw()

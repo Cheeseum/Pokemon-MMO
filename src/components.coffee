@@ -13,6 +13,13 @@ class @RenderComponent extends @Component
     render: (g) =>
         return
 
+class @GenericRenderComponent extends @RenderComponent
+    render: (g) =>
+        renderpos = @object.pos.multiply(PPM)
+
+        g.context.fillStyle = "#0F0F0F"
+        g.context.fillRect(renderpos.x, renderpos.y, 16, 16)
+
 # A physics component should have a move(direction) functions
 class @TilePhysicsComponent extends @Component
     constructor: () ->
