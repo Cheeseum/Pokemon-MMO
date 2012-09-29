@@ -11,7 +11,7 @@ class @World
         if entity.hasComponent("renderer")
             @renderables.push(entity)
 
-        @event_manager.dispatchEvent("add-entity")
+        @event_manager.dispatchEvent("add-entity", entity)
 
     update: (t, dt) =>
         for entity in @entities

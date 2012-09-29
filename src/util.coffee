@@ -29,11 +29,11 @@ class @InputManager
         $(@focus).keydown(@onKeyDown)
 
     onKeyUp: (event) =>
-        @keyStates[event.which] = true
+        @keyStates[event.which] = false
         #TODO: propagate event here
 
     onKeyDown: (event) =>
-        @keyStates[event.which] = false
+        @keyStates[event.which] = true
         #TODO: propagate event here
 
     isKeyUp: (keyCode) =>
