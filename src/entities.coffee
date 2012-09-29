@@ -18,5 +18,5 @@ class @Entity
         return (type of @components) # "of" = "loop through keys"
 
     update: (t, dt) =>
-        for component in @components
-            component.update(t, dt)
+        for type of @components
+            component.update(t, dt) for component in @components[type]
