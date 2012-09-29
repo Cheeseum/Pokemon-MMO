@@ -43,9 +43,23 @@ class @InputManager
     isKeyDown: (keyCode) =>
         return @keyStates[keyCode] or false
 
+#OPTIMIZE: is instancing all of these new Vector objects slow?
 class @Vector
     constructor: (@x = 0, @y = 0) ->
 
     zero: () =>
         @x = 0
         @y = 0
+
+    #FIXME: use some form of method overloading instead (if it even exists)
+    add: (arg) =>
+        if arg instanceof Vector
+            return new Vector(@x + arg.x, @y + arg.y)
+        else
+            return new Vector(@x + arg, @y + arg)
+
+    multiply: (arg) =>
+        if arg instanceof Vector
+            return new Vector(@x * arg.x, @y * arg.y)
+        else
+            return new Vector(@x * arg, @y * arg)
