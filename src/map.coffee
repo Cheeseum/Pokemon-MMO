@@ -1,19 +1,22 @@
+class @MapTileset
+    constructor: (@first_gid, @image_source, @alpha_color = null) ->
+
 class @MapLayer
     constructor: () ->
         # FIXME: possibly initialize @tiles to a fixed size
+        # tiles are stored as integers corresponding to its position in a tileset
+        # see the TMX map format documentation for more details
         @tiles = []
 
     tileAt: (x, y) =>
-        # FIXME: will explode of tiles[x] is undef
+        # FIXME: will explode if tiles[x] is undef
         return @tiles[x][y]
 
-class @MapChunk
+class @Map
     constructor: () ->
         @layers = []
-        @tileset = 0
+        @tilesets = []
 
-    load_from_file: (file) =>
-        #TODO: parse json from file and load
-
-    load_from_json: (json) =>
-        #TODO: parse json into mapchunk objects
+    getTilesetForTile: (tile_id) =>
+        # FIXME: ensure @tilesets is in sorted order
+        return t for t in @tilesets if t.first_gid <= tile_id

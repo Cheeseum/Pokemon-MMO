@@ -21,6 +21,17 @@ class @Game
 
         @world.addEntity(e)
 
+        ld = new TMXMapLoader()
+        ld.loadFromFile('maps/test.tmx')
+
+        # map loading is async
+        window.setTimeout(() ->
+            if ld.map
+                console.log ld.map
+            else
+                window.setTimeout(this)
+        , 500)
+
         @update()
         @draw()
 
