@@ -63,3 +63,28 @@ class @Vector
             return new Vector(@x * arg.x, @y * arg.y)
         else
             return new Vector(@x * arg, @y * arg)
+
+# statically declared Base64 utility class
+class @Base64
+    @encode = (data) =>
+        return btoa(data) if typeof btoa === "function"
+
+        console.err("FIXME: Non-native Base64 encoding not implemented!")
+            
+    @decode = (data) =>
+        return atob(data) if typeof atob === "function"
+
+        console.err("FIXME: Non-native Base64 decoding not implemented!")
+
+    # decode a Base64 string into an array with elements of size "bytes"
+    @decodeAsArray = (data, bytes) =>
+        d_data = @decode(data)
+        out = []
+
+        for i in [0..((d_data.length / bytes) - 1)]
+            out[i] = 0
+
+            for j in [(bytes - 1)..0]
+                out[i] += d_data.charCodeAt((i * bytes) + j) << (j << 3)
+
+        return out
