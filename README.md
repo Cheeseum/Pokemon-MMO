@@ -6,12 +6,15 @@ _all we need is a name..._
 
 ## Compiling
 * run `cake build` for one-time compile
-* alternatively, run `cake watch` for automated compiling
+* Alternatively, run `cake watch` for automated compiling.
 
 ## Usage
-* simply open index.html in your favorite HTML5 compatible browser
+* Simply open index.html in your favorite HTML5 compatible browser.
+* Some browsers (chromium) will prevent map loading from working. If this is the case:
+    * run a small webserver in the cloned repo dir (php -S localhost:8000 works well)
+    * open localhost:8000 instead of index.html
 
 ## Style
-* _4 spaces_ indentation for code readability
-* use coffeescript dialogue whenever possible and sane (or=, not, unless, etc)
+* _4 spaces_ indentation for code readability.
+* Use coffeescript dialogue whenever possible and sane (or=, not, unless, etc)
 
